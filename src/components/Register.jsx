@@ -23,19 +23,6 @@ export default function App() {
   const [submitted, setSubmitted] = useState(false);
   const [valid, setValid] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (
-      values.name &&
-      values.email &&
-      values.phone &&
-      values.age &&
-      values.age >= 16 &&
-      values.age <= 80
-    ) {
-    }
-  };
-
   const handleNewStudent = async (event) => {
     event.preventDefault();
     if (
