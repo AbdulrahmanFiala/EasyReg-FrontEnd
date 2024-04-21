@@ -14,7 +14,7 @@ export async function getStudent(id) {
   return await axios.get(`${API_URL}/${id}`);
 }
 
-export async function updateContact(student) {
+export async function updateStudent(student) {
   return await axios.post(API_URL, student);
 }
 
