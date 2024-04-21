@@ -131,8 +131,8 @@ export default function App() {
           </>
         )}
 
-        {submitted && (!values.phone || values.phone < 16) && (
-          <span id="age-error">You must be 16 years old or older</span>
+        {submitted && (!values.age || values.age < 16 || values.age > 255) && (
+          <span id="age-error">You must be between 16 and 80 years old</span>
         )}
 
         {!valid && (
