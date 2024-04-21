@@ -4,17 +4,17 @@ import { Link } from "react-router-dom";
 const Student = ({ student }) => {
   return (
     <>
-      <div class="col-sm-6 col-lg-4 mt-2">
-        <div class="card">
-          <div class="card-body">
+      <div className="col-sm-6 col-lg-4 mt-2">
+        <div className="card">
+          <div className="card-body">
             <Link
               to={`/students/${student.id}`}
               style={{ textDecoration: "none", color: "inherit" }}
             >
-              <h5 class="card-title">Name: {student.name} </h5>
-              <p class="card-text">Email: {student.email} </p>
-              <p class="card-text">Phone: {student.phone} </p>
-              <p class="card-text">Age: {student.age} </p>
+              <h5 className="card-title">Name: {student.name} </h5>
+              <p className="card-text">Email: {student.email} </p>
+              <p className="card-text">Phone: {student.phone} </p>
+              <p className="card-text">Age: {student.age} </p>
             </Link>
           </div>
         </div>
