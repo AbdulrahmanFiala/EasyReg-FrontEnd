@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { getStudent, getStudents, saveStudent } from "../api/StudentService";
+import { saveStudent } from "../api/StudentService";
 
 export default function App() {
   const [values, setValues] = useState({
@@ -30,27 +30,37 @@ export default function App() {
       values.email &&
       values.phone &&
       values.age &&
-      values.age >= 16
+      values.age >= 16 &&
+      values.age <= 80
     ) {
-      setValid(true);
     }
-    setSubmitted(true);
   };
 
   const handleNewStudent = async (event) => {
     event.preventDefault();
-    try {
-      const { data } = await saveStudent(values);
-    } catch (error) {
-      console.log(error);
+    if (
+      values.name &&
+      values.email &&
+      values.phone &&
+      values.age &&
+      values.age >= 16 &&
+      values.age <= 255
+    ) {
+      setValid(true);
+      try {
+        await saveStudent(values);
+      } catch (error) {
+        console.log(error);
+      }
     }
+    setSubmitted(true);
   };
 
   return (
     <div className="reg-container">
       <div className="form-container">
         <h3 className="text-center">BUE Student Registration</h3>
-        <form className="register-form" onSubmit={handleSubmit}>
+        <form className="register-form" onSubmit={handleNewStudent}>
           {submitted && valid && (
             <div className="success-message">
               <h3>Welcome {values.name}</h3>
@@ -89,7 +99,7 @@ export default function App() {
             <>
               <label for="email">Email</label>
               <input
-                class="form-field"
+                className="form-field"
                 type="email"
                 placeholder="Enter your email"
                 name="email"
@@ -108,7 +118,7 @@ export default function App() {
             <>
               <label for="phone">Phone Number</label>
               <input
-                class="form-field"
+                className="form-field"
                 type="text"
                 placeholder="01XXXXXXXXX"
                 name="phone"
@@ -131,7 +141,7 @@ export default function App() {
             <>
               <label for="age">Age</label>
               <input
-                class="form-field"
+                className="form-field"
                 type="number"
                 placeholder="Enter your age"
                 name="age"
@@ -151,7 +161,7 @@ export default function App() {
             )}
 
           {!valid && (
-            <button class="form-field" type="submit">
+            <button className="form-field" type="submit">
               Register
             </button>
           )}
