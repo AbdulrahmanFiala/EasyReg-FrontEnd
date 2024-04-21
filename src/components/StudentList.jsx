@@ -44,10 +44,10 @@ const StudentList = () => {
   return (
     <main className="student-list">
       {data?.length === 0 && <div>No Contacts. Please add a new contact</div>}
-      <div class="row">
+      <div className="row">
+        <h2 className="text-center">BUE Registered Students</h2>
         {data?.length > 0 &&
           data.map((student) => {
-            console.log(student);
             return <Student student={student} key={student.id} />;
           })}
       </div>
