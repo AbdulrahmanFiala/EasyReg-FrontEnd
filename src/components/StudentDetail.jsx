@@ -7,7 +7,7 @@ import {
   deleteStudent,
 } from "../api/StudentService";
 
-const StudentDetail = ({ getAllStudents }) => {
+const StudentDetail = () => {
   const [student, setStudent] = useState({
     id: "",
     name: "",
@@ -58,7 +58,7 @@ const StudentDetail = ({ getAllStudents }) => {
 
   useEffect(() => {
     fetchStudent(id);
-  });
+  }, [id]);
 
   useEffect(() => {
     let timer;
@@ -85,8 +85,13 @@ const StudentDetail = ({ getAllStudents }) => {
           </div>
         )}
         <form onSubmit={onUpdateStudent}>
-          <Link to="/students" className="link">
-            <i className="bi bi-arrow-left"></i> Back to list
+          <Link
+            to="/students"
+            className="link"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <i className="bi bi-arrow-left"></i>
+            Back to Student list
           </Link>
 
           <input type="hidden" value={student.id} name="id" id="id" />
@@ -146,13 +151,13 @@ const StudentDetail = ({ getAllStudents }) => {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary mt-2 ">
             Update Student
           </button>
           <button
             type="button"
             onClick={() => removeStudent(id)}
-            className="btn btn-danger"
+            className="btn btn-danger m-2 mb-0"
           >
             Delete Student
           </button>
