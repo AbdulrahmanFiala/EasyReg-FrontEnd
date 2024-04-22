@@ -28,15 +28,6 @@ const StudentList = () => {
     setValues({ ...values, [event.target.name]: event.target.value });
   };
 
-  // const updateContact = async (contact) => {
-  //   try {
-  //     const { data } = await saveContact(contact);
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   useEffect(() => {
     getAllStudents();
   }, []);
