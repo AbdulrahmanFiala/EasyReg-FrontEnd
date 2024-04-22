@@ -135,12 +135,9 @@ export default function App() {
             </>
           )}
 
-          {submitted &&
-            (!values.age || values.age < 16 || values.age > 255) && (
-              <span id="age-error">
-                You must be between 16 and 80 years old
-              </span>
-            )}
+          {submitted && (!values.age || values.age < 16 || values.age > 80) && (
+            <span id="age-error">You must be between 16 and 80 years old</span>
+          )}
 
           {!valid && (
             <button className="form-field" type="submit">
