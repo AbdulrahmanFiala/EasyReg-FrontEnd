@@ -10,6 +10,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Register />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/students" element={<StudentList />} />
         <Route path="/students/:id" element={<StudentDetail />} />
       </Routes>
