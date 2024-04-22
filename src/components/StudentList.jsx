@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getStudents } from "../api/StudentService";
 import Student from "./Student";
+import { Link } from "react-router-dom";
 
 const StudentList = () => {
   const [data, setData] = useState({});
@@ -28,6 +29,11 @@ const StudentList = () => {
           data.map((student) => {
             return <Student student={student} key={student.id} />;
           })}
+      </div>
+      <div className="text-center mt-3">
+        <Link to="/register" className="btn btn-success">
+          Back to Registration
+        </Link>
       </div>
     </main>
   );
