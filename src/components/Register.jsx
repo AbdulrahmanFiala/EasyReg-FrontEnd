@@ -31,7 +31,7 @@ export default function App() {
       values.phone &&
       values.age &&
       values.age >= 16 &&
-      values.age <= 255
+      values.age <= 80
     ) {
       setValid(true);
       try {
