@@ -6,7 +6,6 @@ import {
   updateStudent,
   deleteStudent,
 } from "../api/StudentService";
-import { toastError, toastSuccess } from "../api/ToastService";
 
 const StudentDetail = ({ getAllStudents }) => {
   const [student, setStudent] = useState({
@@ -23,12 +22,9 @@ const StudentDetail = ({ getAllStudents }) => {
   const removeStudent = async (id) => {
     try {
       await deleteStudent(id);
-      getAllStudents();
       navigate("/students");
-      toastSuccess("Student deleted successfully");
     } catch (error) {
       console.log(error);
-      toastError(error.message);
     }
   };
 
@@ -38,105 +34,99 @@ const StudentDetail = ({ getAllStudents }) => {
       setStudent(data);
     } catch (error) {
       console.log(error);
-      toastError(error.message);
     }
   };
 
   const onChange = (event) => {
     setStudent({ ...student, [event.target.name]: event.target.value });
+    console.log(student);
   };
 
   const onUpdateStudent = async (event) => {
     event.preventDefault();
     await updateStudent(student);
-    fetchStudent(id);
-    toastSuccess("Student Updated");
   };
 
   useEffect(() => {
-    console.log(student.name);
     fetchStudent(id);
   }, []);
 
   return (
     <>
-      <Link to="/students" className="link">
-        <i className="bi bi-arrow-left"></i> Back to list
-      </Link>
-      <div className="profile">
-        <div className="profile__details">
-          <div className="profile__metadata">
-            <p className="profile__name">{student?.name}</p>
+      <div className="container-fluid" id="update-container">
+        <form onSubmit={onUpdateStudent}>
+          <Link to="/students" className="link">
+            <i className="bi bi-arrow-left"></i> Back to list
+          </Link>
+
+          <input type="hidden" value={student.id} name="id" id="id" />
+
+          <div className="form-group">
+            <label for="name">Name</label>
+            <input
+              className="form-control"
+              type="text"
+              name="name"
+              id="name"
+              aria-describedby="name"
+              onChange={onChange}
+              value={student.name}
+              required
+            />
           </div>
-        </div>
-        <div className="profile__settings">
-          <div>
-            <form onSubmit={onUpdateStudent} className="form">
-              <div className="user-details">
-                <input
-                  type="hidden"
-                  defaultValue={student?.id}
-                  name="id"
-                  required
-                />
-                <div className="input-box">
-                  <span className="details">Name</span>
-                  <input
-                    type="text"
-                    value={student?.name}
-                    onChange={onChange}
-                    name="name"
-                    required
-                  />
-                </div>
-                <div className="input-box">
-                  <span className="details">Email</span>
-                  <input
-                    type="email"
-                    value={student?.email}
-                    onChange={onChange}
-                    name="email"
-                    required
-                  />
-                </div>
-                <div className="input-box">
-                  <span className="details">Phone</span>
-                  <input
-                    type="text"
-                    value={student?.phone}
-                    onChange={onChange}
-                    pattern="01[0-5]{1}[0-9]{8}"
-                    name="phone"
-                    title="Please enter a valid Egyptian phone number."
-                    required
-                  />
-                </div>
-                <div className="input-box">
-                  <span className="details">Age</span>
-                  <input
-                    type="number"
-                    value={student?.age}
-                    onChange={onChange}
-                    name="age"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="form_footer">
-                <button type="submit" className="btn">
-                  Update Student
-                </button>
-                <button
-                  type="button"
-                  onClick={() => removeStudent(id)}
-                  className="btn btn-danger"
-                >
-                  Delete Student
-                </button>
-              </div>
-            </form>
+          <div className="form-group">
+            <label for="email">Email</label>
+            <input
+              className="form-control"
+              name="email"
+              id="email"
+              aria-describedby="email"
+              onChange={onChange}
+              value={student.email}
+              type="email"
+              required
+            />
           </div>
-        </div>
+          <div className="form-group">
+            <label for="phone">Phone</label>
+            <input
+              className="form-control"
+              name="phone"
+              id="phone"
+              aria-describedby="phone"
+              onChange={onChange}
+              value={student.phone}
+              type="text"
+              pattern="01[0-5]{1}[0-9]{8}"
+              title="Please enter a valid Egyptian phone number."
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label for="age">Age</label>
+            <input
+              className="form-control"
+              name="age"
+              id="age"
+              aria-describedby="age"
+              onChange={onChange}
+              value={student.age}
+              type="number"
+              required
+            />
+          </div>
+
+          <button type="submit" className="btn btn-primary">
+            Update Student
+          </button>
+          <button
+            type="button"
+            onClick={() => removeStudent(id)}
+            className="btn btn-danger"
+          >
+            Delete Student
+          </button>
+        </form>
       </div>
     </>
   );
