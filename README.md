@@ -1,4 +1,4 @@
-# EasyReg
+# EasyReg-FrontEnd
 
 ## Description
 
