@@ -15,6 +15,8 @@ const StudentDetail = ({ getAllStudents }) => {
     phone: "",
     age: "",
   });
+  const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -22,7 +24,10 @@ const StudentDetail = ({ getAllStudents }) => {
   const removeStudent = async (id) => {
     try {
       await deleteStudent(id);
-      navigate("/students");
+      setDeleteSuccess(true);
+      setTimeout(() => {
+        navigate("/students");
+      }, 1000);
     } catch (error) {
       console.log(error);
     }
@@ -39,21 +44,46 @@ const StudentDetail = ({ getAllStudents }) => {
 
   const onChange = (event) => {
     setStudent({ ...student, [event.target.name]: event.target.value });
-    console.log(student);
   };
 
   const onUpdateStudent = async (event) => {
     event.preventDefault();
-    await updateStudent(student);
+    try {
+      await updateStudent(student);
+      setUpdateSuccess(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     fetchStudent(id);
-  }, []);
+  });
+
+  useEffect(() => {
+    let timer;
+    if (updateSuccess || deleteSuccess) {
+      timer = setTimeout(() => {
+        setUpdateSuccess(false);
+        setDeleteSuccess(false);
+      }, 5000);
+    }
+    return () => clearTimeout(timer);
+  }, [updateSuccess, deleteSuccess]);
 
   return (
     <>
       <div className="container-fluid" id="update-container">
+        {updateSuccess && (
+          <div className="alert alert-success" role="alert">
+            Student updated successfully!
+          </div>
+        )}
+        {deleteSuccess && (
+          <div className="alert alert-success" role="alert">
+            Student deleted successfully!
+          </div>
+        )}
         <form onSubmit={onUpdateStudent}>
           <Link to="/students" className="link">
             <i className="bi bi-arrow-left"></i> Back to list
@@ -62,7 +92,7 @@ const StudentDetail = ({ getAllStudents }) => {
           <input type="hidden" value={student.id} name="id" id="id" />
 
           <div className="form-group">
-            <label for="name">Name</label>
+            <label htmlFor="name">Name</label>
             <input
               className="form-control"
               type="text"
@@ -75,7 +105,7 @@ const StudentDetail = ({ getAllStudents }) => {
             />
           </div>
           <div className="form-group">
-            <label for="email">Email</label>
+            <label htmlFor="email">Email</label>
             <input
               className="form-control"
               name="email"
@@ -88,7 +118,7 @@ const StudentDetail = ({ getAllStudents }) => {
             />
           </div>
           <div className="form-group">
-            <label for="phone">Phone</label>
+            <label htmlFor="phone">Phone</label>
             <input
               className="form-control"
               name="phone"
@@ -103,7 +133,7 @@ const StudentDetail = ({ getAllStudents }) => {
             />
           </div>
           <div className="form-group">
-            <label for="age">Age</label>
+            <label htmlFor="age">Age</label>
             <input
               className="form-control"
               name="age"
