@@ -19,6 +19,11 @@ EasyReg is a simple registration form with CRUD functionality for inserting and 
 - Form validation to ensure data integrity.
 - Responsive interface for seamless user experience across devices.
 
+## Installation
+
+### Prerequisites
+- Node.js installed.
+- npm (Node Package Manager) installed.
 
 ### Steps
 1. Clone the repository:
