@@ -79,7 +79,7 @@ export default function App() {
 
           {!valid && (
             <>
-              <label for="email">Email</label>
+              <label htmlFor="email">Email</label>
               <input
                 className="form-field"
                 type="email"
@@ -98,7 +98,7 @@ export default function App() {
 
           {!valid && (
             <>
-              <label for="phone">Phone Number</label>
+              <label htmlFor="phone">Phone Number</label>
               <input
                 className="form-field"
                 type="text"
@@ -121,7 +121,7 @@ export default function App() {
 
           {!valid && (
             <>
-              <label for="age">Age</label>
+              <label htmlFor="age">Age</label>
               <input
                 className="form-field"
                 type="number"
