@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://localhost:7242/api/students/";
+const API_URL = "https://localhost:7242/api/students";
 
 export async function saveStudent(student) {
   return await axios.post(API_URL, student);
@@ -15,7 +15,7 @@ export async function getStudent(id) {
 }
 
 export async function updateStudent(student) {
-  return await axios.post(API_URL, student);
+  return await axios.put(API_URL, student);
 }
 
 export async function deleteStudent(id) {
