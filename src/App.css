@@ -77,3 +77,7 @@ label {
 .student-list {
   margin: 1rem;
 }
+
+#update-container {
+  padding: 5rem;
+}
