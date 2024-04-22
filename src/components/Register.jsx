@@ -52,16 +52,11 @@ export default function App() {
             <div className="success-message">
               <h3>Welcome {values.name}</h3>
               <div> Your registration was successful! </div>
-              <button className="form-field">
-                <span>
-                  <Link
-                    to="/students"
-                    className="text-white text-decoration-none fw-bold"
-                  >
-                    Explore BUE Students
-                  </Link>
-                </span>
-              </button>
+              <div className="text-center mt-3">
+                <Link to="/students" className="btn btn-success">
+                  Explore BUE Students
+                </Link>
+              </div>
             </div>
           )}
           {!valid && (
