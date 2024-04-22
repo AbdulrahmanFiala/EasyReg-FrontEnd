@@ -1,18 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { getStudent, getStudents } from "../api/StudentService";
+import { getStudents } from "../api/StudentService";
 import Student from "./Student";
 
 const StudentList = () => {
   const [data, setData] = useState({});
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    title: "",
-    status: "",
-  });
 
   const getAllStudents = async () => {
     try {
@@ -22,10 +13,6 @@ const StudentList = () => {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const onChange = (event) => {
-    setValues({ ...values, [event.target.name]: event.target.value });
   };
 
   useEffect(() => {
